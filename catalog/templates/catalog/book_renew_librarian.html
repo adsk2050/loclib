@@ -1,0 +1,25 @@
+{% extends "catalog/base_generic.html" %}
+{% block title %} Renew borrowed book | AD Lib{% endblock %}
+{% block content %}
+
+    <h1>Renew: {{bookinst.book.title}}</h1>
+    <p>Borrower: {{bookinst.borrower}}</p>
+    {% if bookinst.is_overdue %}
+    <p class="text-danger">Due date: {{bookinst.due_back}}</p>
+    <p class="text-danger">Fine: {{bookinst.fine}}</p>
+    {% else %}
+    <p>Due date: {{bookinst.due_back}}</p>
+    {% endif %}
+
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{form}}
+        </table>
+        <input type="submit" value="Submit" />
+    </form>
+    <br />
+
+
+{% endblock %}

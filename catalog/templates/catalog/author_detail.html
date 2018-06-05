@@ -1,0 +1,44 @@
+{% extends "catalog/base_generic.html" %}
+
+{% block title %} {{ author.first_name }} {{author.last_name}} | AD Lib{% endblock %}
+
+{% block content %}
+    <h1>{{ author.last_name }}, {{ author.first_name }}</h1>
+    <p>{{author.date_of_birth}} - {% if author.date_of_death %}{{author.date_of_death}}{% endif %}</p>
+
+    # my is dead ? function not working
+
+  <!--
+  {% if  is_dead %}
+      <p><strong>Born: </strong>{{ author.date_of_birth }}</p>
+      <p><strong>Died: </strong> {{ author.date_of_death }}, Aged {{ age }} years</p>
+  {% else %}
+      <p><strong>Born: </strong>{{ author.date_of_birth }}, Aged {{ age }} years</p>
+  {% endif %}
+  
+    <p>Genre(s): </p>
+    {% for book in author.book_set.all %}
+    <li>
+      {% for genre in genre.book_set.all %}
+      <p><strong>{{ book.genre }}</strong></p>
+      {% endfor %}
+    </li>
+    {% endfor %}
+
+    <p class="inl"><strong >Language(s):</strong> {% for language in languages.all %}<p class="inl"> {{ language }}{% if not forloop.last %},{% endif %} </p>{% endfor %}</p>
+    <br />
+    <p class="inl"><strong>Genre(s):</strong> {% for genre in genres.all %}<p class="inl">{{ genre }}{% if not forloop.last %}, {% endif %}</p> {% endfor %}</p>
+    -->
+    <div style="margin-left:20px;margin-top:20px">
+        <h4>Books</h4>
+        <ul>
+            {% for book in author.book_set.all %}
+            <li>
+                <hr>
+                <p><strong>{{ book.title }}</strong></p>
+                <p>{{ book.summary}}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "catalog/base_generic.html" %}
+{% block title %} All Authors | AD Lib{% endblock %}
+{% block content %}
+    <h1>Author List</h1>
+
+    {% if author_list %}
+        <ul>
+        {% for author in author_list %}
+            <li>
+                <a href="{{ author.get_absolute_url }}">{{ author.last_name }}, {{ author.first_name }}</a>
+            </li>
+         {% endfor %}
+         </ul>
+
+    {% else %}
+        <p>There is no data on authors of the books.</p>
+    {% endif %}
+{% endblock %}

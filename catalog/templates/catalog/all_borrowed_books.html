@@ -1,0 +1,33 @@
+{% extends "catalog/base_generic.html" %}
+{% block title %} All borrowed books | AD Lib{% endblock %}
+{% block content %}
+    <h1>All borrowed books</h1>
+
+    {% if bookinstance_list %}
+    <div class="table-responsive table-bordered table-striped">
+        <table class="table">
+            <tr>
+              <th>Book Title</th>
+              <th>Due Date</th>
+              <th>User</th>
+            </tr>
+            {% for bookinst in bookinstance_list %}
+            <tr class="{% if bookinst.is_overdue %}danger{% endif %}">
+                <th><a href="{% url 'catalog:book-detail' bookinst.book.pk %}">{{bookinst.book.title}}</a></th>
+                <th>{{ bookinst.due_back }}</th>
+                <th>{{ bookinst.borrower }}</th>
+                <th><a href="{% url 'catalog:renew-book-librarian' bookinst.id %}">Renew</a></th>
+                <th><a href="{% url 'catalog:return-book-librarian' bookinst.id %}">Return</a></th>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% else %}
+      <p>There are no books borrowed.</p>
+    {% endif %}
+{% endblock %}
+
+
+<!---{#% if perms.catalog.can_list_all_borrowed %}
+<th><a href="{#% url 'catalog:renew-book-librarian' bookinst.id %}">Renew</a></th>
+{#% endif %}-->
